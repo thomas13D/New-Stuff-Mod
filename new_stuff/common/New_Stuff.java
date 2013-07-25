@@ -105,6 +105,7 @@ import mods.new_stuff.tool.ItemTitaniumSword;
 import mods.new_stuff.tree.BlockLemonLeaves;
 import mods.new_stuff.tree.BlockLemonSapling;
 import mods.new_stuff.tree.BlockLemonWood;
+import mods.new_stuff.tree.ItemFertilizer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -392,6 +393,7 @@ public New_Stuff(){
 	
 	@Init
 	public void load(FMLInitializationEvent event){
+		MinecraftForge.EVENT_BUS.register(new ItemFertilizer(1020));
 		
 		TitaniumOre = new BlockTitaniumOre(TitaniumOreID, Material.iron).setUnlocalizedName("tiletitaniumore").func_111022_d("TitaniumOre").setHardness(25F).setResistance(75F);
 		NickelOre = new BlockNickelOre(NickelOreID, Material.iron).setUnlocalizedName("tilenickelore").setHardness(15F).setResistance(5F);
@@ -459,6 +461,8 @@ public New_Stuff(){
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
 		
+		
+			
 		
 		
 		gameRegisters();
@@ -1074,7 +1078,7 @@ public New_Stuff(){
 		LanguageRegistry.addName(GrapeBlock, "Grape Block");
 		LanguageRegistry.addName(Grape, "Grape");
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
-	}
+		}
 }
 
 
