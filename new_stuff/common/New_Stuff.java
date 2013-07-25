@@ -64,6 +64,7 @@ import mods.new_stuff.item.ItemEnderiteDust;
 import mods.new_stuff.item.ItemHammer;
 import mods.new_stuff.item.ItemNickelIngot;
 import mods.new_stuff.item.ItemNuclearRod;
+import mods.new_stuff.item.ItemPyroclasticItem;
 import mods.new_stuff.item.ItemRubyFragment;
 import mods.new_stuff.item.ItemSuperAlloyBlend;
 import mods.new_stuff.item.ItemSuperAlloyIngot;
@@ -386,6 +387,8 @@ public New_Stuff(){
 	public int GrapeID = 1018;
 	public static Item SuperAlloyIngot;
 	public int SuperAlloyIngotID = 1019;
+	public static Item PyroclasticItem;
+	public int PyroclasticItemID = 1020;
 	
 	
 	public static Entity PrimedNuclearExplosive;
@@ -455,6 +458,7 @@ public New_Stuff(){
 		Lemon = new ItemLemon(LemonID, 2, false).setPotionEffect(Potion.moveSpeed.id, 20, 1, 2.0F).setUnlocalizedName("Lemon").setCreativeTab(CreativeTabs.tabFood);
 		Lemonade = new ItemLemonade(LemonadeID, 5, false).setPotionEffect(Potion.moveSpeed.id, 50, 1, 2.0F).setUnlocalizedName("Lemonade").setCreativeTab(CreativeTabs.tabFood);
 		SuperAlloyIngot = new ItemSuperAlloyIngot(SuperAlloyIngotID).setUnlocalizedName("IngotSuperAlloy").setCreativeTab(CreativeTabs.tabMaterials);
+		PyroclasticItem = new ItemPyroclasticItem(PyroclasticItemID).setUnlocalizedName("ItemPyroclastic").setCreativeTab(CreativeTabs.tabMaterials);
 		
 		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setUnlocalizedName("Grape");
 		
@@ -974,6 +978,7 @@ public New_Stuff(){
 		GameRegistry.registerItem(Grape, "Grape");
 		GameRegistry.registerBlock(GrapeBlock, "GrapeBlock");
 		GameRegistry.registerBlock(PyroclasticMaterial, "PyroclasticMaterial");
+		GameRegistry.registerItem(PyroclasticItem, "PyroclasticItem");
 	}
 	
 	private static void languageRegisters(){
@@ -1078,6 +1083,7 @@ public New_Stuff(){
 		LanguageRegistry.addName(GrapeBlock, "Grape Block");
 		LanguageRegistry.addName(Grape, "Grape");
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
+		LanguageRegistry.addName(PyroclasticItem, "Pyroclstic Material");
 		}
 }
 
