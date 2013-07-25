@@ -1,6 +1,7 @@
 package mods.new_stuff.biome;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -21,6 +22,7 @@ public class VolcanicWasteland extends BiomeGenBase{
 		this.canSpawnLightningBolt();
 		this.theBiomeDecorator.coalGen = new WorldGenMinable(Block.oreCoal.blockID, 10);;
 		this.spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 2, 1, 3 ));
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityBlaze.class, 3, 1, 3));
 		
 	}
 

@@ -2,6 +2,7 @@ package mods.new_stuff.common;
 
 import java.util.Random;
 
+import mods.new_stuff.biome.VolcanicWasteland;
 import mods.new_stuff.tree.WorldGenLemonTrees;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
@@ -83,10 +84,22 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 				int zCoord = chunkZ + random.nextInt(16);
 				
 				(new WorldGenMinable(New_Stuff.AmethystOre.blockID, 4)).generate(world, random, xCoord, yCoord, zCoord);} 
+			
+			
+			
+			
+			BiomeGenBase biome1 = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ);
+			if ( (biome1 instanceof VolcanicWasteland))
+			for(int i1 = 0; i1 <6; i1++){
+				int xCoord2 = chunkX + random.nextInt(16);
+				int yCoord2 = random.nextInt(100);
+				int zCoord2 = chunkZ + random.nextInt(16);
+				
+				(new WorldGenMinable(New_Stuff.PyroclasticMaterial.blockID, 20)).generate(world, random, xCoord2, yCoord2, zCoord2);} 
 		
 			BiomeGenBase biome = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ);
 			if ( (biome instanceof BiomeGenJungle) || (biome instanceof BiomeGenRiver))
-			for(int i1 = 0; i1 <6; i1++){
+			for(int i11 = 0; i11 <6; i11++){
 				int xCoord1 = chunkX + random.nextInt(16);
 				int yCoord1 = random.nextInt(90);
 				int zCoord1 = chunkZ + random.nextInt(16);
@@ -108,7 +121,8 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 			
 				(new WorldGenMinable(New_Stuff.AluminumOre.blockID, 7)).generate(world, random, xCoord, yCoord, zCoord);}}}
 	
-			
+	
+		
 	
 
 	private void generateNether(World world, Random random, int chunkX, int chunkZ) {

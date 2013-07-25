@@ -1,4 +1,4 @@
-package mods.new_stuff.item;
+package mods.new_stuff.food;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

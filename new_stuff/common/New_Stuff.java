@@ -42,14 +42,19 @@ import mods.new_stuff.block.BlockEnderiteOre;
 import mods.new_stuff.block.BlockNetherGoldOre;
 import mods.new_stuff.block.BlockNickelBlock;
 import mods.new_stuff.block.BlockNickelOre;
+import mods.new_stuff.block.BlockPyroclasticMaterial;
 import mods.new_stuff.block.BlockRubyBlock;
 import mods.new_stuff.block.BlockRubyOre;
 import mods.new_stuff.block.BlockSuperAlloyBlock;
 import mods.new_stuff.block.BlockTitaniumBlock;
 import mods.new_stuff.block.BlockTitaniumOre;
 import mods.new_stuff.block.BlockUraniumOre;
+import mods.new_stuff.crop.BlockGrapeBlock;
 import mods.new_stuff.explosive.BlockNuclearExplosive;
 import mods.new_stuff.explosive.EntityPrimedNuclearExplosive;
+import mods.new_stuff.food.FoodGrape;
+import mods.new_stuff.food.ItemLemon;
+import mods.new_stuff.food.ItemLemonade;
 import mods.new_stuff.item.ItemAluminumIngot;
 import mods.new_stuff.item.ItemAmethystFragment;
 import mods.new_stuff.item.ItemDiamondDust;
@@ -57,8 +62,6 @@ import mods.new_stuff.item.ItemDiamondFragment;
 import mods.new_stuff.item.ItemEnderite;
 import mods.new_stuff.item.ItemEnderiteDust;
 import mods.new_stuff.item.ItemHammer;
-import mods.new_stuff.item.ItemLemon;
-import mods.new_stuff.item.ItemLemonade;
 import mods.new_stuff.item.ItemNickelIngot;
 import mods.new_stuff.item.ItemNuclearRod;
 import mods.new_stuff.item.ItemRubyFragment;
@@ -338,6 +341,11 @@ public New_Stuff(){
 	int NuclearExplosiveID = 518;
 	public static Block SuperAlloyBlock;
 	int SuperAlloyBlockID = 519;
+	public static Block GrapeBlock;
+	int GrapeBlockID = 520;
+	public static Block PyroclasticMaterial;
+	int PyroclasticMaterialID = 521;
+	
 	
 	public static Item TitaniumFragment;
 	public int TitaniumFragmentID = 1000;
@@ -373,15 +381,17 @@ public New_Stuff(){
 	public int LemonID  = 1016;
 	public static Item Lemonade;
 	public int LemonadeID = 1017;
+	public static Item Grape;
+	public int GrapeID = 1018;
 	public static Item SuperAlloyIngot;
-	public int SuperAlloyIngotID = 1018;
+	public int SuperAlloyIngotID = 1019;
+	
 	
 	public static Entity PrimedNuclearExplosive;
 	public int PrimedNuclearExplosiveID = 1000;
 	
 	@Init
 	public void load(FMLInitializationEvent event){
-		
 		
 		TitaniumOre = new BlockTitaniumOre(TitaniumOreID, Material.iron).setUnlocalizedName("tiletitaniumore").func_111022_d("TitaniumOre").setHardness(25F).setResistance(75F);
 		NickelOre = new BlockNickelOre(NickelOreID, Material.iron).setUnlocalizedName("tilenickelore").setHardness(15F).setResistance(5F);
@@ -403,7 +413,8 @@ public New_Stuff(){
 		LemonSapling = new BlockLemonSapling(LemonSaplingID).setUnlocalizedName("tilelemonsapling").setLightOpacity(5).setStepSound(Block.soundGrassFootstep).setHardness(.7F).setResistance(1F);
 		NuclearExplosive = new BlockNuclearExplosive(NuclearExplosiveID).setUnlocalizedName("tilenuclearexplosive");
 		SuperAlloyBlock = new BlockSuperAlloyBlock(SuperAlloyBlockID, Material.iron).setUnlocalizedName("tilesuperalloyblock").setHardness(20F).setResistance(50F);
-		
+		GrapeBlock = new BlockGrapeBlock(GrapeBlockID).setUnlocalizedName("tilegrapeblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
+		PyroclasticMaterial = new BlockPyroclasticMaterial(PyroclasticMaterialID, Material.iron).setUnlocalizedName("PyroclasticMaterial").setStepSound(Block.soundMetalFootstep).setHardness(50F).setResistance(20F);
 		
 		MinecraftForge.setBlockHarvestLevel(RubyOre, "pickaxe", 3);
 		MinecraftForge.setBlockHarvestLevel(EnderiteOre, "pickaxe", 3);
@@ -443,8 +454,12 @@ public New_Stuff(){
 		Lemonade = new ItemLemonade(LemonadeID, 5, false).setPotionEffect(Potion.moveSpeed.id, 50, 1, 2.0F).setUnlocalizedName("Lemonade").setCreativeTab(CreativeTabs.tabFood);
 		SuperAlloyIngot = new ItemSuperAlloyIngot(SuperAlloyIngotID).setUnlocalizedName("IngotSuperAlloy").setCreativeTab(CreativeTabs.tabMaterials);
 		
+		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setUnlocalizedName("Grape");
+		
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
+		
+		
 		
 		gameRegisters();
 		languageRegisters();
@@ -952,6 +967,9 @@ public New_Stuff(){
 		GameRegistry.registerItem(RubyHoe, "RubyHoe");
 		GameRegistry.registerItem(SuperAlloyIngot, "SuperAlloyIngot");
 		GameRegistry.registerBlock(SuperAlloyBlock, "SuperAlloyBlock");
+		GameRegistry.registerItem(Grape, "Grape");
+		GameRegistry.registerBlock(GrapeBlock, "GrapeBlock");
+		GameRegistry.registerBlock(PyroclasticMaterial, "PyroclasticMaterial");
 	}
 	
 	private static void languageRegisters(){
@@ -1053,6 +1071,9 @@ public New_Stuff(){
 		LanguageRegistry.addName(RubyHoe, "Ruby Hoe");
 		LanguageRegistry.addName(SuperAlloyIngot, "Super Alloy Ingot");
 		LanguageRegistry.addName(SuperAlloyBlock, "Super Alloy Block");
+		LanguageRegistry.addName(GrapeBlock, "Grape Block");
+		LanguageRegistry.addName(Grape, "Grape");
+		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
 	}
 }
 
