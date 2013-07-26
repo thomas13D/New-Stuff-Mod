@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class BlockPyroclasticMaterial extends Block{
 	
@@ -29,6 +30,16 @@ public class BlockPyroclasticMaterial extends Block{
 	public int quantityDropped(Random rand){
 		return rand.nextInt(3);
 	}
+	
+
+
+public int idDropped1(int par1, Random rand, int par2){
+	return Item.fireballCharge.itemID;
+}
+
+public int quantityDropped1(Random rand){
+	return rand.nextInt(3);
+}
 
 }
 

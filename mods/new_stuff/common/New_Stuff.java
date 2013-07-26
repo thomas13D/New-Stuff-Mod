@@ -459,7 +459,7 @@ public New_Stuff(){
 		Lemonade = new ItemLemonade(LemonadeID, 5, false).setPotionEffect(Potion.moveSpeed.id, 50, 1, 2.0F).setUnlocalizedName("Lemonade").setCreativeTab(CreativeTabs.tabFood);
 		SuperAlloyIngot = new ItemSuperAlloyIngot(SuperAlloyIngotID).setUnlocalizedName("IngotSuperAlloy").setCreativeTab(CreativeTabs.tabMaterials);
 		
-		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setUnlocalizedName("Grape");
+		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setPotionEffect(Potion.jump.id, 10, 10, 2.0F).setUnlocalizedName("Grape");
 		
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
@@ -876,6 +876,7 @@ public New_Stuff(){
 	private static void entityRegisters(){
 		
 		EntityRegistry.registerGlobalEntityID(NetherWarriorMob.class,"NetherWarrior",EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.addSpawn(NetherWarriorMob.class, 2000, 4, 8, EnumCreatureType.monster, BiomeGenBase.hell);
 		LanguageRegistry.instance().addStringLocalization("New Stuff.NetherWarrior.name", "Nether Warrior");
 	}
 	
