@@ -1,5 +1,10 @@
 package mods.new_stuff.common;
 
+import static cpw.mods.fml.relauncher.Side.CLIENT;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.src.ModLoader;
 import mods.new_stuff.armor.ItemAluminumBoots;
 import mods.new_stuff.armor.ItemAluminumChestplate;
 import mods.new_stuff.armor.ItemAluminumHelmet;
@@ -32,35 +37,14 @@ import mods.new_stuff.explosive.BlockNuclearExplosive;
 
 public class CommonProxyNew_Stuff {
 	
-	public void registerRenderThings(){}
-		
-		public int addArmor(ItemTitaniumBoots armor) {return 0;}
-		public int addArmor(ItemTitaniumLeggings armor) {return 0;}
-		public int addArmor(ItemTitaniumChestplate armor) {return 0;}
-		public int addArmor(ItemTitaniumHelmet armor) {return 0;}
-		public int addArmor(ItemNickelBoots armor) {return 0;}
-		public int addArmor(ItemNickelLeggings armor) {return 0;}
-		public int addArmor(ItemNickelChestplate armor) {return 0;}
-		public int addArmor(ItemNickelHelmet armor) {return 0;}
-		public int addArmor(ItemAluminumBoots armor) {return 0;}
-		public int addArmor(ItemAluminumLeggings armor) {return 0;}
-		public int addArmor(ItemAluminumChestplate armor) {return 0;}
-		public int addArmor(ItemAluminumHelmet armor) {return 0;}
-		public int addArmor(ItemEnderiteBoots armor) {return 0;}
-		public int addArmor(ItemEnderiteLeggings armor) {return 0;}
-		public int addArmor(ItemEnderiteChestplate armor) {return 0;}
-		public int addArmor(ItemEnderiteHelmet armor) {return 0;}
-		public int addArmor(ItemStoneBoots armor) {return 0;}
-		public int addArmor(ItemStoneLeggings armor) {return 0;}
-		public int addArmor(ItemStoneChestplate armor) {return 0;}
-		public int addArmor(ItemStoneHelmet armor) {return 0;}
-		public int addArmor(ItemRubyBoots armor) {return 0;}
-		public int addArmor(ItemRubyLeggings armor) {return 0;}
-		public int addArmor(ItemRubyChestplate armor) {return 0;}
-		public int addArmor(ItemRubyHelmet armor) {return 0;}
-		public int addArmor(ItemSuperAlloyBoots armor) {return 0;}
-		public int addArmor(ItemSuperAlloyLeggings armor) {return 0;}
-		public int addArmor(ItemSuperAlloyChestplate armor) {return 0;}
-		public int addArmor(ItemSuperAlloyHelmet armor) {return 0;}
-	
+	public void registerRenderInformation(){
+		ModLoader.addArmor(toString());
 	}
+	
+	
+    public static int addArmor(String armor)
+    {
+        return RenderingRegistry.addNewArmourRendererPrefix(armor);
+    }
+		
+		}
