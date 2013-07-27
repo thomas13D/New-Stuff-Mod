@@ -23,11 +23,13 @@ public class BlockPyroclasticMaterial extends Block{
 	}
 	
 	public int idDropped(int par1, Random rand, int par2){
-		return New_Stuff.TitaniumFragment.itemID;
+		return New_Stuff.PyroclasticItem.itemID;
+				
 	}
 	
 	public int quantityDropped(Random rand){
-		return rand.nextInt(3);
+		return rand.nextInt(4
+		);
 	}
 
 }

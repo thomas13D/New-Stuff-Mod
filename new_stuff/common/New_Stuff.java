@@ -1084,8 +1084,8 @@ public New_Stuff(){
 		LanguageRegistry.addName(Grape, "Grape");
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
 		LanguageRegistry.addName(PyroclasticItem, "Pyroclstic Material");
-		}
-}
+	
+	}}
 
 
 	
