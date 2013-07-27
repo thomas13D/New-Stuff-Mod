@@ -10,11 +10,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import mods.new_stuff.common.CommonProxyNew_Stuff;
 import mods.new_stuff.explosive.EntityPrimedNuclearExplosive;
+import mods.new_stuff.explosive.RenderPrimedNuclearExplosive;
 
 public class ClientProxyNew_Stuff extends CommonProxyNew_Stuff{
 	
 	@Override
-	public void registerRenderInformation(){}
+	public void registerRenderInformation(){
+		RenderingRegistry.registerEntityRenderingHandler(EntityPrimedNuclearExplosive.class, new RenderPrimedNuclearExplosive());
+	}
 	
 	  public static int addArmor(String armor){
 	    
