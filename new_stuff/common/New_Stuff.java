@@ -64,7 +64,6 @@ import mods.new_stuff.item.ItemEnderiteDust;
 import mods.new_stuff.item.ItemHammer;
 import mods.new_stuff.item.ItemNickelIngot;
 import mods.new_stuff.item.ItemNuclearRod;
-import mods.new_stuff.item.ItemPyroclasticItem;
 import mods.new_stuff.item.ItemRubyFragment;
 import mods.new_stuff.item.ItemSuperAlloyBlend;
 import mods.new_stuff.item.ItemSuperAlloyIngot;
@@ -72,6 +71,7 @@ import mods.new_stuff.item.ItemTitaniumDust;
 import mods.new_stuff.item.ItemTitaniumFragment;
 import mods.new_stuff.item.ItemTitaniumIngot;
 import mods.new_stuff.item.ItemUraniumDust;
+import mods.new_stuff.mobs.NetherWarriorMob;
 import mods.new_stuff.tool.ItemAluminumAxe;
 import mods.new_stuff.tool.ItemAluminumHoe;
 import mods.new_stuff.tool.ItemAluminumPickaxe;
@@ -112,6 +112,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -126,6 +127,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -387,8 +389,6 @@ public New_Stuff(){
 	public int GrapeID = 1018;
 	public static Item SuperAlloyIngot;
 	public int SuperAlloyIngotID = 1019;
-	public static Item PyroclasticItem;
-	public int PyroclasticItemID = 1020;
 	
 	
 	public static Entity PrimedNuclearExplosive;
@@ -458,9 +458,8 @@ public New_Stuff(){
 		Lemon = new ItemLemon(LemonID, 2, false).setPotionEffect(Potion.moveSpeed.id, 20, 1, 2.0F).setUnlocalizedName("Lemon").setCreativeTab(CreativeTabs.tabFood);
 		Lemonade = new ItemLemonade(LemonadeID, 5, false).setPotionEffect(Potion.moveSpeed.id, 50, 1, 2.0F).setUnlocalizedName("Lemonade").setCreativeTab(CreativeTabs.tabFood);
 		SuperAlloyIngot = new ItemSuperAlloyIngot(SuperAlloyIngotID).setUnlocalizedName("IngotSuperAlloy").setCreativeTab(CreativeTabs.tabMaterials);
-		PyroclasticItem = new ItemPyroclasticItem(PyroclasticItemID).setUnlocalizedName("ItemPyroclastic").setCreativeTab(CreativeTabs.tabMaterials);
 		
-		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setUnlocalizedName("Grape");
+		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setPotionEffect(Potion.jump.id, 10, 10, 2.0F).setUnlocalizedName("Grape");
 		
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
@@ -874,7 +873,12 @@ public New_Stuff(){
 
 
 	}
-
+	private static void entityRegisters(){
+		
+		EntityRegistry.registerGlobalEntityID(NetherWarriorMob.class,"NetherWarrior",EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.addSpawn(NetherWarriorMob.class, 2000, 4, 8, EnumCreatureType.monster, BiomeGenBase.hell);
+		LanguageRegistry.instance().addStringLocalization("New Stuff.NetherWarrior.name", "Nether Warrior");
+	}
 	
 	private static void gameRegisters(){
 		
@@ -978,7 +982,6 @@ public New_Stuff(){
 		GameRegistry.registerItem(Grape, "Grape");
 		GameRegistry.registerBlock(GrapeBlock, "GrapeBlock");
 		GameRegistry.registerBlock(PyroclasticMaterial, "PyroclasticMaterial");
-		GameRegistry.registerItem(PyroclasticItem, "PyroclasticItem");
 	}
 	
 	private static void languageRegisters(){
@@ -1083,9 +1086,9 @@ public New_Stuff(){
 		LanguageRegistry.addName(GrapeBlock, "Grape Block");
 		LanguageRegistry.addName(Grape, "Grape");
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
-		LanguageRegistry.addName(PyroclasticItem, "Pyroclstic Material");
-	
-	}}
+		}
+		
+}
 
 
 	

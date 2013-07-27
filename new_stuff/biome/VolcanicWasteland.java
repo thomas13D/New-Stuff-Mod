@@ -14,7 +14,7 @@ public class VolcanicWasteland extends BiomeGenBase{
 		super(par1);
 		this.topBlock = (byte) Block.stone.blockID;
 		this.fillerBlock = (byte) Block.lavaMoving.blockID;
-		this.setMinMaxHeight(0.1F, 0.41F);
+		this.setMinMaxHeight(0.1F, 0.43F);
 		this.theBiomeDecorator.deadBushPerChunk = 30;
 		this.theBiomeDecorator.ironGen = new WorldGenMinable(Block.oreIron.blockID, 10);;
 		this.theBiomeDecorator.diamondGen = new WorldGenMinable(Block.oreDiamond.blockID, 6);;
