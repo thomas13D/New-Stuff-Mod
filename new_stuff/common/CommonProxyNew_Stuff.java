@@ -37,14 +37,12 @@ import mods.new_stuff.explosive.BlockNuclearExplosive;
 
 public class CommonProxyNew_Stuff {
 	
-	public void registerRenderInformation(){
-		ModLoader.addArmor(toString());
-	}
+	public void registerRenderInformation(){}
 	
 	
     public static int addArmor(String armor)
     {
-        return RenderingRegistry.addNewArmourRendererPrefix(armor);
+        return 0;
     }
 		
 		}

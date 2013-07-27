@@ -14,10 +14,10 @@ import mods.new_stuff.explosive.EntityPrimedNuclearExplosive;
 public class ClientProxyNew_Stuff extends CommonProxyNew_Stuff{
 	
 	@Override
-	public void registerRenderInformation(){
-		}	
-	public static int addArmor(String armor)
-	{
+	public void registerRenderInformation(){}
+	
+	  public static int addArmor(String armor){
+	    
 	  return ModLoader.addArmor(armor);
 	}
 	}
