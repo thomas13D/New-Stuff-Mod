@@ -33,26 +33,17 @@ import mods.new_stuff.armor.ItemTitaniumChestplate;
 import mods.new_stuff.armor.ItemTitaniumHelmet;
 import mods.new_stuff.armor.ItemTitaniumLeggings;
 import mods.new_stuff.block.BlockAluminumBlock;
-import mods.new_stuff.block.BlockAluminumOre;
 import mods.new_stuff.block.BlockAmethystBlock;
-import mods.new_stuff.block.BlockAmethystOre;
-import mods.new_stuff.block.BlockEndDiamondOre;
 import mods.new_stuff.block.BlockEnderiteBlock;
-import mods.new_stuff.block.BlockEnderiteOre;
-import mods.new_stuff.block.BlockNetherGoldOre;
 import mods.new_stuff.block.BlockNickelBlock;
-import mods.new_stuff.block.BlockNickelOre;
-import mods.new_stuff.block.BlockPyroclasticMaterial;
 import mods.new_stuff.block.BlockRubyBlock;
-import mods.new_stuff.block.BlockRubyOre;
 import mods.new_stuff.block.BlockSuperAlloyBlock;
 import mods.new_stuff.block.BlockTitaniumBlock;
-import mods.new_stuff.block.BlockTitaniumOre;
-import mods.new_stuff.block.BlockUraniumOre;
 import mods.new_stuff.crop.BlockGrapeBlock;
+import mods.new_stuff.crop.BlockTomatoBlock;
 import mods.new_stuff.explosive.BlockNuclearExplosive;
-import mods.new_stuff.explosive.EntityPrimedNuclearExplosive;
 import mods.new_stuff.food.FoodGrape;
+import mods.new_stuff.food.FoodTomato;
 import mods.new_stuff.food.ItemLemon;
 import mods.new_stuff.food.ItemLemonade;
 import mods.new_stuff.item.ItemAluminumIngot;
@@ -72,6 +63,16 @@ import mods.new_stuff.item.ItemTitaniumFragment;
 import mods.new_stuff.item.ItemTitaniumIngot;
 import mods.new_stuff.item.ItemUraniumDust;
 import mods.new_stuff.mobs.NetherWarriorMob;
+import mods.new_stuff.ore.BlockAluminumOre;
+import mods.new_stuff.ore.BlockAmethystOre;
+import mods.new_stuff.ore.BlockEndDiamondOre;
+import mods.new_stuff.ore.BlockEnderiteOre;
+import mods.new_stuff.ore.BlockNetherGoldOre;
+import mods.new_stuff.ore.BlockNickelOre;
+import mods.new_stuff.ore.BlockPyroclasticMaterial;
+import mods.new_stuff.ore.BlockRubyOre;
+import mods.new_stuff.ore.BlockTitaniumOre;
+import mods.new_stuff.ore.BlockUraniumOre;
 import mods.new_stuff.tool.ItemAluminumAxe;
 import mods.new_stuff.tool.ItemAluminumHoe;
 import mods.new_stuff.tool.ItemAluminumPickaxe;
@@ -109,14 +110,12 @@ import mods.new_stuff.tree.BlockLemonWood;
 import mods.new_stuff.tree.ItemFertilizer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.src.ModLoader;
@@ -130,8 +129,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "New Stuff", name = "New Stuff", version = "Pre-Release 1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
@@ -349,6 +346,8 @@ public New_Stuff(){
 	int GrapeBlockID = 520;
 	public static Block PyroclasticMaterial;
 	int PyroclasticMaterialID = 521;
+	public static Block TomatoBlock;
+	int TomatoBlockID = 522;
 	
 	
 	public static Item TitaniumFragment;
@@ -389,6 +388,8 @@ public New_Stuff(){
 	public int GrapeID = 1018;
 	public static Item SuperAlloyIngot;
 	public int SuperAlloyIngotID = 1019;
+	public static Item Tomato;
+	public int TomatoID = 1029;
 	
 	
 	public static Entity PrimedNuclearExplosive;
@@ -420,6 +421,7 @@ public New_Stuff(){
 		SuperAlloyBlock = new BlockSuperAlloyBlock(SuperAlloyBlockID, Material.iron).setUnlocalizedName("tilesuperalloyblock").setHardness(20F).setResistance(50F);
 		GrapeBlock = new BlockGrapeBlock(GrapeBlockID).setUnlocalizedName("tilegrapeblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
 		PyroclasticMaterial = new BlockPyroclasticMaterial(PyroclasticMaterialID, Material.iron).setUnlocalizedName("PyroclasticMaterial").setStepSound(Block.soundMetalFootstep).setHardness(50F).setResistance(20F);
+		TomatoBlock = new BlockTomatoBlock(TomatoBlockID).setUnlocalizedName("tiletomatoblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
 		
 		MinecraftForge.setBlockHarvestLevel(RubyOre, "pickaxe", 3);
 		MinecraftForge.setBlockHarvestLevel(EnderiteOre, "pickaxe", 3);
@@ -460,6 +462,7 @@ public New_Stuff(){
 		SuperAlloyIngot = new ItemSuperAlloyIngot(SuperAlloyIngotID).setUnlocalizedName("IngotSuperAlloy").setCreativeTab(CreativeTabs.tabMaterials);
 		
 		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setPotionEffect(Potion.jump.id, 10, 10, 2.0F).setUnlocalizedName("Grape");
+		Tomato = new FoodTomato(1019, 3, 0.4F, TomatoBlock.blockID, Block.tilledField.blockID).setPotionEffect(Potion.regeneration.id, 10, 10, 2.0F).setUnlocalizedName("Tomato");
 		
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
@@ -982,6 +985,8 @@ public New_Stuff(){
 		GameRegistry.registerItem(Grape, "Grape");
 		GameRegistry.registerBlock(GrapeBlock, "GrapeBlock");
 		GameRegistry.registerBlock(PyroclasticMaterial, "PyroclasticMaterial");
+		GameRegistry.registerBlock(TomatoBlock, "TomatoBlock");
+		GameRegistry.registerItem(Tomato, "Tomato");
 	}
 	
 	private static void languageRegisters(){
@@ -1083,9 +1088,11 @@ public New_Stuff(){
 		LanguageRegistry.addName(RubyHoe, "Ruby Hoe");
 		LanguageRegistry.addName(SuperAlloyIngot, "Super Alloy Ingot");
 		LanguageRegistry.addName(SuperAlloyBlock, "Super Alloy Block");
-		LanguageRegistry.addName(GrapeBlock, "Grape Block");
+		LanguageRegistry.addName(GrapeBlock, "Grape Vine");
 		LanguageRegistry.addName(Grape, "Grape");
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
+		LanguageRegistry.addName(TomatoBlock, "Tomato Plant");
+		LanguageRegistry.addName(Tomato, "Tomato");
 		}
 		
 }

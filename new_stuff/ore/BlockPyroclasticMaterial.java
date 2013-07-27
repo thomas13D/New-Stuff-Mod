@@ -1,4 +1,4 @@
-package mods.new_stuff.block;
+package mods.new_stuff.ore;
 
 
 
