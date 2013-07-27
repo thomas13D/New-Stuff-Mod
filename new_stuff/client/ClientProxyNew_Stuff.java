@@ -15,6 +15,7 @@ import mods.new_stuff.explosive.RenderPrimedNuclearExplosive;
 public class ClientProxyNew_Stuff extends CommonProxyNew_Stuff{
 	
 	@Override
+<<<<<<< HEAD
 	public void registerRenderInformation(){
 		RenderingRegistry.registerEntityRenderingHandler(EntityPrimedNuclearExplosive.class, new RenderPrimedNuclearExplosive());
 	}
@@ -23,6 +24,14 @@ public class ClientProxyNew_Stuff extends CommonProxyNew_Stuff{
 	    
 	  return ModLoader.addArmor(armor);
 	}
+=======
+	public void registerRenderThings(){
+		
+	
+	}	
+		
+		
+>>>>>>> Added RedForest Biome, Red Trees, and RedGrassBlock
 	}
 
             

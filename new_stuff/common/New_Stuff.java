@@ -37,6 +37,7 @@ import mods.new_stuff.block.BlockAluminumBlock;
 import mods.new_stuff.block.BlockAmethystBlock;
 import mods.new_stuff.block.BlockEnderiteBlock;
 import mods.new_stuff.block.BlockNickelBlock;
+import mods.new_stuff.block.BlockRedGrassBlock;
 import mods.new_stuff.block.BlockRubyBlock;
 import mods.new_stuff.block.BlockSuperAlloyBlock;
 import mods.new_stuff.block.BlockTitaniumBlock;
@@ -109,6 +110,9 @@ import mods.new_stuff.tool.ItemTitaniumSword;
 import mods.new_stuff.tree.BlockLemonLeaves;
 import mods.new_stuff.tree.BlockLemonSapling;
 import mods.new_stuff.tree.BlockLemonWood;
+import mods.new_stuff.tree.BlockRedLeaves;
+import mods.new_stuff.tree.BlockRedSapling;
+import mods.new_stuff.tree.BlockRedWood;
 import mods.new_stuff.tree.ItemFertilizer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -222,6 +226,7 @@ public class New_Stuff{
 	
 	public static BiomeGenBase VolcanicWasteland;
 	public static BiomeGenBase Glacier;
+	public static BiomeGenBase RedForest;
 	
 	
 	
@@ -310,12 +315,20 @@ public New_Stuff(){
 		SuperAlloyShovel = new ItemSuperAlloyShovel(3052,toolSuperAlloy).setUnlocalizedName("SuperAlloyShovel").setCreativeTab(CreativeTabs.tabTools);
 		SuperAlloyAxe = new ItemSuperAlloyAxe(3053, toolSuperAlloy).setUnlocalizedName("SuperAlloyAxe").setCreativeTab(CreativeTabs.tabTools);
 		SuperAlloyHoe = new ItemSuperAlloyHoe(3054, toolSuperAlloy).setUnlocalizedName("SuperAlloyHoe").setCreativeTab(CreativeTabs.tabTools);
+<<<<<<< HEAD
 		
 		SuperAlloyHelmet = new ItemSuperAlloyHelmet(3055, armorSuperAlloy, CommonProxyNew_Stuff.addArmor("superalloy"), 0).setUnlocalizedName("SuperAlloyHelmet").setCreativeTab(CreativeTabs.tabCombat);
 		SuperAlloyChestplate = new ItemSuperAlloyChestplate(3056, armorSuperAlloy, CommonProxyNew_Stuff.addArmor("superalloy"), 1).setUnlocalizedName("SuperAlloyChestplate").setCreativeTab(CreativeTabs.tabCombat);
 		SuperAlloyLeggings = new ItemSuperAlloyLeggings(3057, armorEnderite, CommonProxyNew_Stuff.addArmor("superalloy"), 2).setUnlocalizedName("SuperAlloyLeggings").setCreativeTab(CreativeTabs.tabCombat);
 		SuperAlloyBoots = new ItemSuperAlloyBoots(3058, armorEnderite, CommonProxyNew_Stuff.addArmor("superalloy"), 3).setUnlocalizedName("SuperAlloyBoots").setCreativeTab(CreativeTabs.tabCombat);
 
+=======
+		SuperAlloyHelmet = new ItemSuperAlloyHelmet(3055, armorSuperAlloy, ModLoader.addArmor("superalloy"), 0).setUnlocalizedName("SuperAlloyHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyChestplate = new ItemSuperAlloyChestplate(3056, armorSuperAlloy, ModLoader.addArmor("superalloy"), 1).setUnlocalizedName("SuperAlloyChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyLeggings = new ItemSuperAlloyLeggings(3057, armorEnderite, ModLoader.addArmor("superalloy"), 2).setUnlocalizedName("SuperAlloyLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyBoots = new ItemSuperAlloyBoots(3058, armorEnderite, ModLoader.addArmor("superalloy"), 3).setUnlocalizedName("SuperAlloyBoots").setCreativeTab(CreativeTabs.tabCombat);
+	
+>>>>>>> Added RedForest Biome, Red Trees, and RedGrassBlock
 }
 	
 	public static Block TitaniumOre;
@@ -364,7 +377,14 @@ public New_Stuff(){
 	int PyroclasticMaterialID = 521;
 	public static Block TomatoBlock;
 	int TomatoBlockID = 522;
-	
+	public static Block RedWood;
+	int RedWoodID = 523;
+	public static Block RedLeaves;
+	int RedLeavesID = 524;
+	public static Block RedSapling;
+	int RedSaplingID = 525;
+	public static Block RedGrassBlock;
+	int RedGrassBlockID = 255;
 	
 	public static Item TitaniumFragment;
 	public int TitaniumFragmentID = 1000;
@@ -406,7 +426,8 @@ public New_Stuff(){
 	public int SuperAlloyIngotID = 1019;
 	public static Item Tomato;
 	public int TomatoID = 1029;
-	
+	public static Item IronArrow;
+	public int IronArrowID = 1030;
 	
 	public static Entity PrimedNuclearExplosive;
 	public int PrimedNuclearExplosiveID = 1000;
@@ -439,6 +460,10 @@ public New_Stuff(){
 		GrapeBlock = new BlockGrapeBlock(GrapeBlockID).setUnlocalizedName("tilegrapeblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
 		PyroclasticMaterial = new BlockPyroclasticMaterial(PyroclasticMaterialID, Material.iron).setUnlocalizedName("PyroclasticMaterial").setStepSound(Block.soundMetalFootstep).setHardness(50F).setResistance(20F);
 		TomatoBlock = new BlockTomatoBlock(TomatoBlockID).setUnlocalizedName("tiletomatoblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
+		RedWood = new BlockRedWood(RedWoodID).setUnlocalizedName("tileredwood").setStepSound(Block.soundWoodFootstep).setHardness(5F).setResistance(55F);
+		RedLeaves = new BlockRedLeaves(RedLeavesID).setUnlocalizedName("tileredleaves").setLightOpacity(5).setStepSound(Block.soundGrassFootstep).setHardness(.5F).setResistance(1F);
+		RedSapling = new BlockRedSapling(RedSaplingID).setUnlocalizedName("tileredsapling").setLightOpacity(5).setStepSound(Block.soundGrassFootstep).setHardness(.7F).setResistance(1F);
+		RedGrassBlock = new BlockRedGrassBlock(RedGrassBlockID, Material.grass).setUnlocalizedName("tileredgrassblock").setStepSound(Block.soundGrassFootstep).setHardness(20F).setResistance(50F);
 		
 		MinecraftForge.setBlockHarvestLevel(RubyOre, "pickaxe", 3);
 		MinecraftForge.setBlockHarvestLevel(EnderiteOre, "pickaxe", 3);
@@ -458,6 +483,8 @@ public New_Stuff(){
 		MinecraftForge.setBlockHarvestLevel(LemonLeaves, "shears", 1);
 		MinecraftForge.setBlockHarvestLevel(LemonWood, "axe", 1);
 		MinecraftForge.setBlockHarvestLevel(SuperAlloyBlock, "pickaxe", 2);
+		MinecraftForge.setBlockHarvestLevel(RedLeaves, "shears", 1);
+		MinecraftForge.setBlockHarvestLevel(RedWood, "axe", 1);
 		
 		TitaniumFragment = new ItemTitaniumFragment(TitaniumFragmentID).setUnlocalizedName("FragmentTitanium").setCreativeTab(CreativeTabs.tabMaterials);
 		TitaniumIngot = new ItemTitaniumIngot(TitaniumIngotID).setUnlocalizedName("IngotTitanium").setCreativeTab(CreativeTabs.tabMaterials);
@@ -483,7 +510,7 @@ public New_Stuff(){
 		
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
-		
+		RedForest = new mods.new_stuff.biome.RedForest(32).setBiomeName("Red Forest").setDisableRain().setTemperatureRainfall(2.0F, 0.0F);
 		
 			
 		
@@ -890,14 +917,14 @@ public New_Stuff(){
 			"XXX", "EXE", "EXE",
 			'E', Enderite,	
 		});
-
-
+		
 	}
 	private static void entityRegisters(){
 		
 		EntityRegistry.registerGlobalEntityID(NetherWarriorMob.class,"NetherWarrior",EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.addSpawn(NetherWarriorMob.class, 2000, 4, 8, EnumCreatureType.monster, BiomeGenBase.hell);
-		LanguageRegistry.instance().addStringLocalization("New Stuff.NetherWarrior.name", "Nether Warrior");
+		
+	
 	}
 	
 	private static void gameRegisters(){
@@ -1004,6 +1031,10 @@ public New_Stuff(){
 		GameRegistry.registerBlock(PyroclasticMaterial, "PyroclasticMaterial");
 		GameRegistry.registerBlock(TomatoBlock, "TomatoBlock");
 		GameRegistry.registerItem(Tomato, "Tomato");
+		GameRegistry.registerBlock(RedWood, "RedWood");
+		GameRegistry.registerBlock(RedLeaves, "RedLeaves");
+		GameRegistry.registerBlock(RedSapling, "RedSapling");
+		GameRegistry.registerBlock(RedGrassBlock, "RedGrassBlock");
 	}
 	
 	private static void languageRegisters(){
@@ -1110,7 +1141,12 @@ public New_Stuff(){
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
 		LanguageRegistry.addName(TomatoBlock, "Tomato Plant");
 		LanguageRegistry.addName(Tomato, "Tomato");
-		}
+		LanguageRegistry.instance().addStringLocalization("New Stuff.NetherWarrior.name", "Nether Warrior");
+		LanguageRegistry.addName(RedWood, "Red Wood");	
+		LanguageRegistry.addName(RedLeaves, "Red Leaves");
+		LanguageRegistry.addName(RedSapling, "Red Sapling");
+		LanguageRegistry.addName(RedGrassBlock, "Red Grass Block");
+	}
 		
 }
 

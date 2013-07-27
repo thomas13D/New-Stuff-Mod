@@ -2,8 +2,10 @@ package mods.new_stuff.common;
 
 import java.util.Random;
 
+import mods.new_stuff.biome.RedForest;
 import mods.new_stuff.biome.VolcanicWasteland;
 import mods.new_stuff.tree.WorldGenLemonTrees;
+import mods.new_stuff.tree.WorldGenRedTrees;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -133,8 +135,16 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 			 
 			(new WorldGenMinable(New_Stuff.NetherGoldOre.blockID, 14, Block.netherrack.blockID)).generate(world, random, xCoord, yCoord, zCoord);
 	}
-	
 		
+		BiomeGenBase biome1 = world.getWorldChunkManager().getBiomeGenAt(chunkX, chunkZ);
+		if ( (biome1 instanceof RedForest))
+		for(int i1 = 0; i1 <6; i1++){
+			int xCoord2 = chunkX + random.nextInt(16);
+			int yCoord2 = random.nextInt(100);
+			int zCoord2 = chunkZ + random.nextInt(16);
+			
+			new WorldGenRedTrees(false, 14, 0, 0, false).generate(world, random , xCoord2, yCoord2, zCoord2);
+			
 }
 	
-}
+}}
