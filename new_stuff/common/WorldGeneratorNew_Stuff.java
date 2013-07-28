@@ -54,7 +54,7 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 			int yCoord = random.nextInt(30);
 			int zCoord = chunkZ + random.nextInt(16);
 			
-			(new WorldGenMinable(New_Stuff.TitaniumOre.blockID, 2)).generate(world, random, xCoord, yCoord, zCoord);
+			(new WorldGenMinable(New_Stuff.TitaniumOre.blockID, 4)).generate(world, random, xCoord, yCoord, zCoord);
 		
 		}		
 		{
@@ -65,7 +65,7 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 			int yCoord = random.nextInt(50);
 			int zCoord = chunkZ + random.nextInt(16);
 			
-			(new WorldGenMinable(New_Stuff.NickelOre.blockID, 7)).generate(world, random, xCoord, yCoord, zCoord);
+			(new WorldGenMinable(New_Stuff.NickelOre.blockID, 9)).generate(world, random, xCoord, yCoord, zCoord);
 		}
 		
 		
@@ -74,7 +74,7 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 				int yCoord = random.nextInt(15);
 				int zCoord = chunkZ + random.nextInt(16);
 				
-				(new WorldGenMinable(New_Stuff.UraniumOre.blockID, 2)).generate(world,  random, xCoord, yCoord, zCoord);}
+				(new WorldGenMinable(New_Stuff.UraniumOre.blockID, 5)).generate(world,  random, xCoord, yCoord, zCoord);}
 	
 		
 	
@@ -83,7 +83,7 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 				int yCoord = random.nextInt(17);
 				int zCoord = chunkZ + random.nextInt(16);
 				
-				(new WorldGenMinable(New_Stuff.AmethystOre.blockID, 3)).generate(world, random, xCoord, yCoord, zCoord);} 
+				(new WorldGenMinable(New_Stuff.AmethystOre.blockID, 4)).generate(world, random, xCoord, yCoord, zCoord);} 
 			
 			
 			
@@ -112,14 +112,14 @@ public class WorldGeneratorNew_Stuff implements IWorldGenerator{
 				int yCoord = random.nextInt(48);
 				int zCoord = chunkZ + random.nextInt(16);
 				
-				(new WorldGenMinable(New_Stuff.RubyOre.blockID, 3)).generate(world, random, xCoord, yCoord, zCoord);}		
+				(new WorldGenMinable(New_Stuff.RubyOre.blockID, 5)).generate(world, random, xCoord, yCoord, zCoord);}		
 		
 			for(int i = 0; i < 8; i++){
 				int xCoord = chunkX + random.nextInt(16);
 				int yCoord = random.nextInt(48);
 				int zCoord = chunkZ + random.nextInt(16);
 			
-				(new WorldGenMinable(New_Stuff.AluminumOre.blockID, 6)).generate(world, random, xCoord, yCoord, zCoord);}}}
+				(new WorldGenMinable(New_Stuff.AluminumOre.blockID, 7)).generate(world, random, xCoord, yCoord, zCoord);}}}
 	
 	
 		
