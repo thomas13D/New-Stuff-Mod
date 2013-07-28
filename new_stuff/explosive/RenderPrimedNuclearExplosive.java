@@ -50,6 +50,7 @@ public class RenderPrimedNuclearExplosive extends Render
         }
 
         var10 = (1.0F - ((float)par1EntityTNTPrimed.fuse - par9 + 1.0F) / 100.0F) * 0.8F;
+        this.renderPrimedTNT(par1EntityTNTPrimed, par2, par4, par6, par8, par9);
         this.blockRenderer.renderBlockAsItem(New_Stuff.NuclearExplosive, 0, par1EntityTNTPrimed.getBrightness(par9));
 
         if (par1EntityTNTPrimed.fuse / 5 % 2 == 0)
