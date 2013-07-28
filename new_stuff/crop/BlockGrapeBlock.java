@@ -64,30 +64,12 @@ public class BlockGrapeBlock extends BlockCrops
         case 0:
             return -1;
         case 1:
-            return -1;
-        case 2:
-        	return -1;
-        	
-        case 3:
-        	return -1;
-        	
-        case 4:
-        	return -1;
-        	
-        case 5:
-        	return -1;
-        	
-        case 6:
+            return New_Stuff.Grape.itemID;
         default: // Error case!
-    		return New_Stuff.Grape.itemID;}
-    	}
-    	public int quantityDropped(Random rand){
-    		return rand.nextInt(4);}
-   	
-        	
-        	
-        	
-        	
+        		return New_Stuff.Grape.itemID;}
+        	}
+        	public int quantityDropped(Random rand){
+        		return rand.nextInt(4);}
 
 @SideOnly(Side.CLIENT)
 public void registerIcons(IconRegister par1IconRegister){

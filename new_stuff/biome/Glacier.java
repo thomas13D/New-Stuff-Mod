@@ -13,7 +13,7 @@ public class Glacier extends BiomeGenBase{
 		super(par1);
 		this.topBlock = (byte) Block.snow.blockID;
 		this.fillerBlock = (byte) Block.ice.blockID;
-		this.setMinMaxHeight(2.0F, 2.0F);
+		this.setMinMaxHeight(1.7F, 1.7F);
 		this.theBiomeDecorator.ironGen = new WorldGenMinable(Block.oreIron.blockID, 10);;
 		this.theBiomeDecorator.diamondGen = new WorldGenMinable(Block.oreDiamond.blockID, 6);;
 		this.spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 2, 5, 9));

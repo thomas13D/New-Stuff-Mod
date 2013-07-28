@@ -26,7 +26,7 @@ public class WorldGenLemonTrees extends WorldGenerator
 
     public WorldGenLemonTrees(boolean par1)
     {
-        this(par1, 2, 0, 0, false);
+        this(par1, 4, 0, 0, false);
     }
 
     public WorldGenLemonTrees(boolean par1, int par2, int par3, int par4, boolean par5)
