@@ -4,6 +4,7 @@
 package mods.new_stuff.common;
 
 
+import static cpw.mods.fml.relauncher.Side.CLIENT;
 import mods.new_stuff.armor.ItemAluminumBoots;
 import mods.new_stuff.armor.ItemAluminumChestplate;
 import mods.new_stuff.armor.ItemAluminumHelmet;
@@ -33,26 +34,18 @@ import mods.new_stuff.armor.ItemTitaniumChestplate;
 import mods.new_stuff.armor.ItemTitaniumHelmet;
 import mods.new_stuff.armor.ItemTitaniumLeggings;
 import mods.new_stuff.block.BlockAluminumBlock;
-import mods.new_stuff.block.BlockAluminumOre;
 import mods.new_stuff.block.BlockAmethystBlock;
-import mods.new_stuff.block.BlockAmethystOre;
-import mods.new_stuff.block.BlockEndDiamondOre;
 import mods.new_stuff.block.BlockEnderiteBlock;
-import mods.new_stuff.block.BlockEnderiteOre;
-import mods.new_stuff.block.BlockNetherGoldOre;
 import mods.new_stuff.block.BlockNickelBlock;
-import mods.new_stuff.block.BlockNickelOre;
-import mods.new_stuff.block.BlockPyroclasticMaterial;
 import mods.new_stuff.block.BlockRubyBlock;
-import mods.new_stuff.block.BlockRubyOre;
 import mods.new_stuff.block.BlockSuperAlloyBlock;
 import mods.new_stuff.block.BlockTitaniumBlock;
-import mods.new_stuff.block.BlockTitaniumOre;
-import mods.new_stuff.block.BlockUraniumOre;
+import mods.new_stuff.client.ClientProxyNew_Stuff;
 import mods.new_stuff.crop.BlockGrapeBlock;
+import mods.new_stuff.crop.BlockTomatoBlock;
 import mods.new_stuff.explosive.BlockNuclearExplosive;
-import mods.new_stuff.explosive.EntityPrimedNuclearExplosive;
 import mods.new_stuff.food.FoodGrape;
+import mods.new_stuff.food.FoodTomato;
 import mods.new_stuff.food.ItemLemon;
 import mods.new_stuff.food.ItemLemonade;
 import mods.new_stuff.item.ItemAluminumIngot;
@@ -71,6 +64,17 @@ import mods.new_stuff.item.ItemTitaniumDust;
 import mods.new_stuff.item.ItemTitaniumFragment;
 import mods.new_stuff.item.ItemTitaniumIngot;
 import mods.new_stuff.item.ItemUraniumDust;
+import mods.new_stuff.mobs.NetherWarriorMob;
+import mods.new_stuff.ore.BlockAluminumOre;
+import mods.new_stuff.ore.BlockAmethystOre;
+import mods.new_stuff.ore.BlockEndDiamondOre;
+import mods.new_stuff.ore.BlockEnderiteOre;
+import mods.new_stuff.ore.BlockNetherGoldOre;
+import mods.new_stuff.ore.BlockNickelOre;
+import mods.new_stuff.ore.BlockPyroclasticMaterial;
+import mods.new_stuff.ore.BlockRubyOre;
+import mods.new_stuff.ore.BlockTitaniumOre;
+import mods.new_stuff.ore.BlockUraniumOre;
 import mods.new_stuff.tool.ItemAluminumAxe;
 import mods.new_stuff.tool.ItemAluminumHoe;
 import mods.new_stuff.tool.ItemAluminumPickaxe;
@@ -105,15 +109,15 @@ import mods.new_stuff.tool.ItemTitaniumSword;
 import mods.new_stuff.tree.BlockLemonLeaves;
 import mods.new_stuff.tree.BlockLemonSapling;
 import mods.new_stuff.tree.BlockLemonWood;
+import mods.new_stuff.tree.ItemFertilizer;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.src.ModLoader;
@@ -122,11 +126,12 @@ import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "New Stuff", name = "New Stuff", version = "Pre-Release 1")
@@ -134,8 +139,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 
 
+
+
+
 public class New_Stuff{
 
+	
+	
+	@SidedProxy(clientSide = "mods.new_stuff.client.ClientProxyNew_Stuff", serverSide = "mods.new_stuff.common.CommonProxyNew_Stuff")
+	public static CommonProxyNew_Stuff proxy;
+		
+	
+	
 	
 	public static Item TitaniumPickaxe;
 	public static Item TitaniumSword;
@@ -208,6 +223,8 @@ public class New_Stuff{
 	public static BiomeGenBase VolcanicWasteland;
 	public static BiomeGenBase Glacier;
 	
+	
+	
 	public static EnumArmorMaterial armorTitanium = EnumHelper.addArmorMaterial("Titanium",40, new int[]{8, 15, 12, 7}, 16);
 	public static EnumArmorMaterial armorNickel = EnumHelper.addArmorMaterial("Nickel", 20, new int[]{2, 6, 3, 2}, 18);
 	public static EnumArmorMaterial armorStone = EnumHelper.addArmorMaterial("Stone", 6, new int[]{1, 5, 2, 1}, 20);
@@ -225,7 +242,7 @@ public class New_Stuff{
 	public static EnumToolMaterial toolSuperAlloy = EnumHelper.addToolMaterial("SuperAlloy", 7, -1, 50F, 15, 120);
 	
 public New_Stuff(){
-		
+	 
 		TitaniumPickaxe = new ItemTitaniumPickaxe(3000, toolTitanium).setUnlocalizedName("TitaniumPickaxe").setCreativeTab(CreativeTabs.tabTools);
 		TitaniumSword = new ItemTitaniumSword(3001, toolTitanium).setUnlocalizedName("TitaniumSword").setCreativeTab(CreativeTabs.tabCombat);
 		TitaniumShovel = new ItemTitaniumShovel(3002, toolTitanium).setUnlocalizedName("TitaniumShovel").setCreativeTab(CreativeTabs.tabTools);
@@ -250,20 +267,20 @@ public New_Stuff(){
 		EnderiteAxe = new ItemEnderiteAxe(3018, toolEnderite).setUnlocalizedName("EnderiteAxe").setCreativeTab(CreativeTabs.tabTools);
 		EnderiteHoe = new ItemEnderiteHoe(3019, toolEnderite).setUnlocalizedName("EnderiteHoe").setCreativeTab(CreativeTabs.tabTools);
 		
-		TitaniumHelmet = new ItemTitaniumHelmet(3020, armorTitanium, ModLoader.addArmor("titanium"), 0).setUnlocalizedName("TitaniumHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		TitaniumChestplate = new ItemTitaniumChestplate(3021, armorTitanium, ModLoader.addArmor("titanium"), 1).setUnlocalizedName("TitaniumChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		TitaniumLeggings = new ItemTitaniumLeggings(3022, armorTitanium, ModLoader.addArmor("titanium"), 2).setUnlocalizedName("TitaniumLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		TitaniumBoots = new ItemTitaniumBoots(3023, armorTitanium, ModLoader.addArmor("titanium"), 3).setUnlocalizedName("TitaniumBoots").setCreativeTab(CreativeTabs.tabCombat);
+		TitaniumHelmet = new ItemTitaniumHelmet(3020, armorTitanium, CommonProxyNew_Stuff.addArmor("titanium"), 0).setUnlocalizedName("TitaniumHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		TitaniumChestplate = new ItemTitaniumChestplate(3021, armorTitanium, CommonProxyNew_Stuff.addArmor("titanium"), 1).setUnlocalizedName("TitaniumChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		TitaniumLeggings = new ItemTitaniumLeggings(3022, armorTitanium, CommonProxyNew_Stuff.addArmor("titanium"), 2).setUnlocalizedName("TitaniumLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		TitaniumBoots = new ItemTitaniumBoots(3023, armorTitanium, CommonProxyNew_Stuff.addArmor("titanium"), 3).setUnlocalizedName("TitaniumBoots").setCreativeTab(CreativeTabs.tabCombat);
 
-		NickelHelmet = new ItemNickelHelmet(3024, armorNickel, ModLoader.addArmor("nickel"), 0).setUnlocalizedName("NickelHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		NickelChestplate = new ItemNickelChestplate(3025, armorNickel, ModLoader.addArmor("nickel"), 1).setUnlocalizedName("NickelChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		NickelLeggings = new ItemNickelLeggings(3026, armorNickel, ModLoader.addArmor("nickel"), 2).setUnlocalizedName("NickelLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		NickelBoots = new ItemNickelBoots(3027, armorNickel, ModLoader.addArmor("nickel"), 3).setUnlocalizedName("NickelBoots").setCreativeTab(CreativeTabs.tabCombat);
+		NickelHelmet = new ItemNickelHelmet(3024, armorNickel, CommonProxyNew_Stuff.addArmor("nickel"), 0).setUnlocalizedName("NickelHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		NickelChestplate = new ItemNickelChestplate(3025, armorNickel, CommonProxyNew_Stuff.addArmor("nickel"), 1).setUnlocalizedName("NickelChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		NickelLeggings = new ItemNickelLeggings(3026, armorNickel, CommonProxyNew_Stuff.addArmor("nickel"), 2).setUnlocalizedName("NickelLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		NickelBoots = new ItemNickelBoots(3027, armorNickel, CommonProxyNew_Stuff.addArmor("nickel"), 3).setUnlocalizedName("NickelBoots").setCreativeTab(CreativeTabs.tabCombat);
 		
-		StoneHelmet = new ItemStoneHelmet(3028, armorStone, ModLoader.addArmor("stone"), 0).setUnlocalizedName("StoneHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		StoneChestplate = new ItemStoneChestplate(3029, armorStone, ModLoader.addArmor("stone"), 1).setUnlocalizedName("StoneChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		StoneLeggings = new ItemStoneLeggings(3030, armorStone, ModLoader.addArmor("stone"), 2).setUnlocalizedName("StoneLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		StoneBoots = new ItemStoneBoots(3031, armorStone, ModLoader.addArmor("stone"), 3).setUnlocalizedName("StoneBoots").setCreativeTab(CreativeTabs.tabCombat);
+		StoneHelmet = new ItemStoneHelmet(3028, armorStone, CommonProxyNew_Stuff.addArmor("stone"), 0).setUnlocalizedName("StoneHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		StoneChestplate = new ItemStoneChestplate(3029, armorStone, CommonProxyNew_Stuff.addArmor("stone"), 1).setUnlocalizedName("StoneChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		StoneLeggings = new ItemStoneLeggings(3030, armorStone, CommonProxyNew_Stuff.addArmor("stone"), 2).setUnlocalizedName("StoneLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		StoneBoots = new ItemStoneBoots(3031, armorStone, CommonProxyNew_Stuff.addArmor("stone"), 3).setUnlocalizedName("StoneBoots").setCreativeTab(CreativeTabs.tabCombat);
 		
 		RubySword = new ItemRubySword(3032,toolRuby).setUnlocalizedName("RubySword").setCreativeTab(CreativeTabs.tabCombat);
 		RubyPickaxe = new ItemRubyPickaxe(3033, toolRuby).setUnlocalizedName("RubyPickaxe").setCreativeTab(CreativeTabs.tabTools);
@@ -271,22 +288,22 @@ public New_Stuff(){
 		RubyAxe = new ItemRubyAxe(3035, toolRuby).setUnlocalizedName("RubyAxe").setCreativeTab(CreativeTabs.tabTools);
 		RubyHoe = new ItemRubyHoe(3036, toolRuby).setUnlocalizedName("RubyHoe").setCreativeTab(CreativeTabs.tabTools);
 		
-		RubyHelmet = new ItemRubyHelmet(3037, armorRuby, ModLoader.addArmor("ruby"), 0).setUnlocalizedName("RubyHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		RubyChestplate = new ItemRubyChestplate(3038, armorRuby, ModLoader.addArmor("ruby"), 1).setUnlocalizedName("RubyChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		RubyLeggings = new ItemRubyLeggings(3039, armorRuby, ModLoader.addArmor("ruby"), 2).setUnlocalizedName("RubyLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		RubyBoots = new ItemRubyBoots(3040, armorRuby, ModLoader.addArmor("ruby"), 3).setUnlocalizedName("RubyBoots").setCreativeTab(CreativeTabs.tabCombat);
+		RubyHelmet = new ItemRubyHelmet(3037, armorRuby, CommonProxyNew_Stuff.addArmor("ruby"), 0).setUnlocalizedName("RubyHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		RubyChestplate = new ItemRubyChestplate(3038, armorRuby, CommonProxyNew_Stuff.addArmor("ruby"), 1).setUnlocalizedName("RubyChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		RubyLeggings = new ItemRubyLeggings(3039, armorRuby, CommonProxyNew_Stuff.addArmor("ruby"), 2).setUnlocalizedName("RubyLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		RubyBoots = new ItemRubyBoots(3040, armorRuby, CommonProxyNew_Stuff.addArmor("ruby"), 3).setUnlocalizedName("RubyBoots").setCreativeTab(CreativeTabs.tabCombat);
 		
 		AmethystDagger = new ItemAmethystDagger(3041,toolAmethyst).setUnlocalizedName("AmethystDagger").setCreativeTab(CreativeTabs.tabCombat);
 		
-		EnderiteHelmet = new ItemEnderiteHelmet(3042, armorEnderite, ModLoader.addArmor("enderite"), 0).setUnlocalizedName("EnderiteHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		EnderiteChestplate = new ItemEnderiteChestplate(3043, armorEnderite, ModLoader.addArmor("enderite"), 1).setUnlocalizedName("EnderiteChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		EnderiteLeggings = new ItemEnderiteLeggings(3044, armorEnderite, ModLoader.addArmor("enderite"), 2).setUnlocalizedName("EnderiteLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		EnderiteBoots = new ItemEnderiteBoots(3045, armorEnderite, ModLoader.addArmor("enderite"), 3).setUnlocalizedName("EnderiteBoots").setCreativeTab(CreativeTabs.tabCombat);
+		EnderiteHelmet = new ItemEnderiteHelmet(3042, armorEnderite, CommonProxyNew_Stuff.addArmor("enderite"), 0).setUnlocalizedName("EnderiteHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		EnderiteChestplate = new ItemEnderiteChestplate(3043, armorEnderite, CommonProxyNew_Stuff.addArmor("enderite"), 1).setUnlocalizedName("EnderiteChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		EnderiteLeggings = new ItemEnderiteLeggings(3044, armorEnderite, CommonProxyNew_Stuff.addArmor("enderite"), 2).setUnlocalizedName("EnderiteLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		EnderiteBoots = new ItemEnderiteBoots(3045, armorEnderite, CommonProxyNew_Stuff.addArmor("enderite"), 3).setUnlocalizedName("EnderiteBoots").setCreativeTab(CreativeTabs.tabCombat);
 
-		AluminumHelmet = new ItemAluminumHelmet(3046, armorEnderite, ModLoader.addArmor("aluminum"), 0).setUnlocalizedName("AluminumHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		AluminumChestplate = new ItemAluminumChestplate(3047, armorEnderite, ModLoader.addArmor("aluminum"), 1).setUnlocalizedName("AluminumChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		AluminumLeggings = new ItemAluminumLeggings(3048, armorEnderite, ModLoader.addArmor("aluminum"), 2).setUnlocalizedName("AluminumLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		AluminumBoots = new ItemAluminumBoots(3049, armorEnderite, ModLoader.addArmor("aluminum"), 3).setUnlocalizedName("AluminumBoots").setCreativeTab(CreativeTabs.tabCombat);
+		AluminumHelmet = new ItemAluminumHelmet(3046, armorEnderite, CommonProxyNew_Stuff.addArmor("aluminum"), 0).setUnlocalizedName("AluminumHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		AluminumChestplate = new ItemAluminumChestplate(3047, armorEnderite, CommonProxyNew_Stuff.addArmor("aluminum"), 1).setUnlocalizedName("AluminumChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		AluminumLeggings = new ItemAluminumLeggings(3048, armorEnderite, CommonProxyNew_Stuff.addArmor("aluminum"), 2).setUnlocalizedName("AluminumLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		AluminumBoots = new ItemAluminumBoots(3049, armorEnderite, CommonProxyNew_Stuff.addArmor("aluminum"), 3).setUnlocalizedName("AluminumBoots").setCreativeTab(CreativeTabs.tabCombat);
 
 		SuperAlloyPickaxe = new ItemSuperAlloyPickaxe(3050, toolSuperAlloy).setUnlocalizedName("SuperAlloyPickaxe").setCreativeTab(CreativeTabs.tabTools);
 		SuperAlloySword = new ItemSuperAlloySword(3051, toolSuperAlloy).setUnlocalizedName("SuperAlloySword").setCreativeTab(CreativeTabs.tabCombat);
@@ -294,10 +311,10 @@ public New_Stuff(){
 		SuperAlloyAxe = new ItemSuperAlloyAxe(3053, toolSuperAlloy).setUnlocalizedName("SuperAlloyAxe").setCreativeTab(CreativeTabs.tabTools);
 		SuperAlloyHoe = new ItemSuperAlloyHoe(3054, toolSuperAlloy).setUnlocalizedName("SuperAlloyHoe").setCreativeTab(CreativeTabs.tabTools);
 		
-		SuperAlloyHelmet = new ItemSuperAlloyHelmet(3055, armorSuperAlloy, ModLoader.addArmor("superalloy"), 0).setUnlocalizedName("SuperAlloyHelmet").setCreativeTab(CreativeTabs.tabCombat);
-		SuperAlloyChestplate = new ItemSuperAlloyChestplate(3056, armorSuperAlloy, ModLoader.addArmor("superalloy"), 1).setUnlocalizedName("SuperAlloyChestplate").setCreativeTab(CreativeTabs.tabCombat);
-		SuperAlloyLeggings = new ItemSuperAlloyLeggings(3057, armorEnderite, ModLoader.addArmor("superalloy"), 2).setUnlocalizedName("SuperAlloyLeggings").setCreativeTab(CreativeTabs.tabCombat);
-		SuperAlloyBoots = new ItemSuperAlloyBoots(3058, armorEnderite, ModLoader.addArmor("superalloy"), 3).setUnlocalizedName("SuperAlloyBoots").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyHelmet = new ItemSuperAlloyHelmet(3055, armorSuperAlloy, CommonProxyNew_Stuff.addArmor("superalloy"), 0).setUnlocalizedName("SuperAlloyHelmet").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyChestplate = new ItemSuperAlloyChestplate(3056, armorSuperAlloy, CommonProxyNew_Stuff.addArmor("superalloy"), 1).setUnlocalizedName("SuperAlloyChestplate").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyLeggings = new ItemSuperAlloyLeggings(3057, armorEnderite, CommonProxyNew_Stuff.addArmor("superalloy"), 2).setUnlocalizedName("SuperAlloyLeggings").setCreativeTab(CreativeTabs.tabCombat);
+		SuperAlloyBoots = new ItemSuperAlloyBoots(3058, armorEnderite, CommonProxyNew_Stuff.addArmor("superalloy"), 3).setUnlocalizedName("SuperAlloyBoots").setCreativeTab(CreativeTabs.tabCombat);
 
 }
 	
@@ -345,6 +362,8 @@ public New_Stuff(){
 	int GrapeBlockID = 520;
 	public static Block PyroclasticMaterial;
 	int PyroclasticMaterialID = 521;
+	public static Block TomatoBlock;
+	int TomatoBlockID = 522;
 	
 	
 	public static Item TitaniumFragment;
@@ -385,6 +404,8 @@ public New_Stuff(){
 	public int GrapeID = 1018;
 	public static Item SuperAlloyIngot;
 	public int SuperAlloyIngotID = 1019;
+	public static Item Tomato;
+	public int TomatoID = 1029;
 	
 	
 	public static Entity PrimedNuclearExplosive;
@@ -392,6 +413,8 @@ public New_Stuff(){
 	
 	@Init
 	public void load(FMLInitializationEvent event){
+		MinecraftForge.EVENT_BUS.register(new ItemFertilizer(1020));
+		proxy.registerRenderInformation();
 		
 		TitaniumOre = new BlockTitaniumOre(TitaniumOreID, Material.iron).setUnlocalizedName("tiletitaniumore").func_111022_d("TitaniumOre").setHardness(25F).setResistance(75F);
 		NickelOre = new BlockNickelOre(NickelOreID, Material.iron).setUnlocalizedName("tilenickelore").setHardness(15F).setResistance(5F);
@@ -415,6 +438,7 @@ public New_Stuff(){
 		SuperAlloyBlock = new BlockSuperAlloyBlock(SuperAlloyBlockID, Material.iron).setUnlocalizedName("tilesuperalloyblock").setHardness(20F).setResistance(50F);
 		GrapeBlock = new BlockGrapeBlock(GrapeBlockID).setUnlocalizedName("tilegrapeblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
 		PyroclasticMaterial = new BlockPyroclasticMaterial(PyroclasticMaterialID, Material.iron).setUnlocalizedName("PyroclasticMaterial").setStepSound(Block.soundMetalFootstep).setHardness(50F).setResistance(20F);
+		TomatoBlock = new BlockTomatoBlock(TomatoBlockID).setUnlocalizedName("tiletomatoblock").setStepSound(Block.soundGrassFootstep).setHardness(0.0F);
 		
 		MinecraftForge.setBlockHarvestLevel(RubyOre, "pickaxe", 3);
 		MinecraftForge.setBlockHarvestLevel(EnderiteOre, "pickaxe", 3);
@@ -454,11 +478,14 @@ public New_Stuff(){
 		Lemonade = new ItemLemonade(LemonadeID, 5, false).setPotionEffect(Potion.moveSpeed.id, 50, 1, 2.0F).setUnlocalizedName("Lemonade").setCreativeTab(CreativeTabs.tabFood);
 		SuperAlloyIngot = new ItemSuperAlloyIngot(SuperAlloyIngotID).setUnlocalizedName("IngotSuperAlloy").setCreativeTab(CreativeTabs.tabMaterials);
 		
-		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setUnlocalizedName("Grape");
+		Grape = new FoodGrape(1018, 3, 0.4F, GrapeBlock.blockID, Block.tilledField.blockID).setPotionEffect(Potion.jump.id, 10, 10, 2.0F).setUnlocalizedName("Grape");
+		Tomato = new FoodTomato(1019, 3, 0.4F, TomatoBlock.blockID, Block.tilledField.blockID).setPotionEffect(Potion.regeneration.id, 10, 10, 2.0F).setUnlocalizedName("Tomato");
 		
 		VolcanicWasteland = new mods.new_stuff.biome.VolcanicWasteland(30).setBiomeName("Volcanic Wasteland").setDisableRain().setTemperatureRainfall(2.0F, 0.0F).setColor(16421912);
 		Glacier = new mods.new_stuff.biome.Glacier(31).setBiomeName("Glacier").setColor(747097).func_76733_a(5159473).setEnableSnow().setTemperatureRainfall(0.05F, 0.8F);
 		
+		
+			
 		
 		
 		gameRegisters();
@@ -866,7 +893,12 @@ public New_Stuff(){
 
 
 	}
-
+	private static void entityRegisters(){
+		
+		EntityRegistry.registerGlobalEntityID(NetherWarriorMob.class,"NetherWarrior",EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.addSpawn(NetherWarriorMob.class, 2000, 4, 8, EnumCreatureType.monster, BiomeGenBase.hell);
+		LanguageRegistry.instance().addStringLocalization("New Stuff.NetherWarrior.name", "Nether Warrior");
+	}
 	
 	private static void gameRegisters(){
 		
@@ -970,9 +1002,8 @@ public New_Stuff(){
 		GameRegistry.registerItem(Grape, "Grape");
 		GameRegistry.registerBlock(GrapeBlock, "GrapeBlock");
 		GameRegistry.registerBlock(PyroclasticMaterial, "PyroclasticMaterial");
-		GameRegistry.registerBlock(LemonWood, "LemonWood");
-		GameRegistry.registerBlock(LemonLeaves, "LemonLeaves");
-		GameRegistry.registerBlock(LemonSapling, "LemonSapling");
+		GameRegistry.registerBlock(TomatoBlock, "TomatoBlock");
+		GameRegistry.registerItem(Tomato, "Tomato");
 	}
 	
 	private static void languageRegisters(){
@@ -1059,7 +1090,7 @@ public New_Stuff(){
 		LanguageRegistry.addName(SuperAlloyChestplate, "Super Alloy Chestplate");
 		LanguageRegistry.addName(SuperAlloyLeggings, "Super Alloy Leggings");
 		LanguageRegistry.addName(SuperAlloyBoots, "Super Alloy Boots");
-		LanguageRegistry.addName(LemonWood, "Lemon Wood");
+		LanguageRegistry.addName(LemonWood, "Lemon Wood");	
 		LanguageRegistry.addName(LemonLeaves, "Lemon Leaves");
 		LanguageRegistry.addName(LemonSapling, "Lemon Sapling");
 		LanguageRegistry.addName(Lemon, "Lemon");
@@ -1074,11 +1105,13 @@ public New_Stuff(){
 		LanguageRegistry.addName(RubyHoe, "Ruby Hoe");
 		LanguageRegistry.addName(SuperAlloyIngot, "Super Alloy Ingot");
 		LanguageRegistry.addName(SuperAlloyBlock, "Super Alloy Block");
-		LanguageRegistry.addName(GrapeBlock, "Grape Block");
+		LanguageRegistry.addName(GrapeBlock, "Grape Vine");
 		LanguageRegistry.addName(Grape, "Grape");
 		LanguageRegistry.addName(PyroclasticMaterial, "Pyroclastic Material");
+		LanguageRegistry.addName(TomatoBlock, "Tomato Plant");
+		LanguageRegistry.addName(Tomato, "Tomato");
+		}
 		
-	}
 }
 
 
